@@ -1,3 +1,4 @@
+import { left } from "@popperjs/core";
 import "../style/index.css";
 
 /**
@@ -28,15 +29,35 @@ function render(variables = {}) {
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
+  //Condición para el nombre
+  const name = variables.name === null ? "Your" : variables.name;
+  const lastName = variables.lastName || "whole name";
+  const wholeName = `<h1> ${name} ${lastName}</h1>`;
 
+  //Para la posición - redes sociales
+  const position =
+    variables.socialMediaPosition == "position-left"
+      ? "position-left"
+      : "position-right";
+  //Para el rol
+  const positionLaboral =
+    variables.role == null ? `<h2> </h2>` : `<h2>${variables.role}</h2>`;
+  //Para la ciudad y país
+  const city = variables.city == null ? `City` : `${variables.city}`;
+  const country =
+    variables.country == null
+      ? `Country`
+      : variables.country == null
+      ? `Country`
+      : `${variables.country}`;
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
+          ${wholeName}
+          ${positionLaboral}
+          <h3>${city}, ${country}</h3>
+          <ul class="${position}">
             <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
             <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
             <li><a href="https://linkedin.com/school/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
